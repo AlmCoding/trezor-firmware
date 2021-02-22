@@ -32,6 +32,13 @@
 #define WINDOW_HEIGHT 320
 #define TOUCH_OFFSET_X 110
 #define TOUCH_OFFSET_Y 40
+
+#elif TREZOR_EMULATOR_SLIM
+#define WINDOW_WIDTH 240
+#define WINDOW_HEIGHT 240
+#define TOUCH_OFFSET_X 0
+#define TOUCH_OFFSET_Y 0
+
 #else
 #define WINDOW_WIDTH 400
 #define WINDOW_HEIGHT 600
@@ -144,6 +151,11 @@ void display_init(void) {
 #include "background_raspi.h"
   BACKGROUND = IMG_LoadTexture_RW(
       RENDERER, SDL_RWFromMem(background_raspi_jpg, background_raspi_jpg_len),
+      0);
+#elif TREZOR_EMULATOR_SLIM
+#include "background_black.h"
+  BACKGROUND = IMG_LoadTexture_RW(
+      RENDERER, SDL_RWFromMem(background_black_jpg, background_black_jpg_len),
       0);
 #else
 #if TREZOR_MODEL == T
